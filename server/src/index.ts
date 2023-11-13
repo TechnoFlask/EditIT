@@ -18,6 +18,7 @@ const io = new Server(8000, {
 });
 
 io.on("connection", (socket) => {
+  console.log("CONNECTED!!!!");
   socket.on("get-document", async (docId) => {
     const document = await findOrCreateDocument(docId);
     socket.join(docId);
