@@ -6,10 +6,6 @@ import DocumentModel from "./schema";
 
 config();
 
-console.log(process.env.NODE_VERSION);
-console.log(process.env.DATABASE_URI);
-console.log(process.env.CLIENT_URL);
-
 connect(process.env.DATABASE_URI!);
 
 const INITIAL_DATA = "";
@@ -22,6 +18,7 @@ const io = new Server(8000, {
 });
 
 io.on("connection", (socket) => {
+  console.log("CONNECTED!!!!");
   socket.on("get-document", async (docId) => {
     const document = await findOrCreateDocument(docId);
     socket.join(docId);
