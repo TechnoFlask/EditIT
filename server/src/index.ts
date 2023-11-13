@@ -6,19 +6,18 @@ import DocumentModel from "./schema";
 
 config();
 
-connect(process.env.DATABASE_URI || "mongodb://localhost:27017/EditIT");
+connect(process.env.DATABASE_URI!);
 
 const INITIAL_DATA = "";
 
 const io = new Server(8000, {
   cors: {
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin: process.env.CLIENT_URL!,
     methods: ["GET", "POST"],
   },
 });
 
 io.on("connection", (socket) => {
-  console.log("CONNECTED!!!!");
   socket.on("get-document", async (docId) => {
     const document = await findOrCreateDocument(docId);
     socket.join(docId);

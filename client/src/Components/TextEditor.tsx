@@ -25,8 +25,7 @@ export default function TextEditor() {
 
   // Socket connection useEffect
   useEffect(() => {
-    console.log(import.meta.env.VITE_SERVER_URL);
-    const s = io(import.meta.env.VITE_SERVER_URL || "http://localhost:8000");
+    const s = io(import.meta.env.VITE_SERVER_URL!);
     setSocket(s);
     return () => {
       s.disconnect();
